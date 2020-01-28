@@ -1,4 +1,5 @@
 import unittest
+from versionCompare import version_compare
 from version_compare import compare
 
 class TestCompare(unittest.TestCase):
@@ -94,6 +95,10 @@ class TestCompare(unittest.TestCase):
         version1 = "3.3,2"
         version2 = "version 1"
         self.assertEqual(compare(version1, version2), "Invalid version format for both versions")
+
+        version1 = "-3.1"
+        version2 = "3.1"
+        self.assertEqual(compare(version1, version2), "Invalid version format for version 1")
 
     def test_mixed_inputs(self):
         version1 = "1.2a23.dev35"
