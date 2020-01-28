@@ -1,7 +1,13 @@
 import re
 
+# This is a sligtly modified version of the function found in Appendix B of https://www.python.org/dev/peps/pep-0440/
+# It checks if the input string is a valid version string format
+def is_canonical(version):
+    return re.search(r'^([1-9][0-9]*!)?(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*)){1,2}((a|b|rc)(0|[1-9][0-9]*))?(\.post(0|[1-9][0-9]*))?(\.dev(0|[1-9][0-9]*))?$', version) is not None
+
+
 def compare(version1, version2):
-    # We start by checking if both inputs are valid version strings using the is_canonical function found after this function
+    # We start by checking if both inputs are valid version strings using the is_canonical() function
     if not is_canonical(version1) and not is_canonical(version2):
         return "Invalid version format for both versions"
     elif not is_canonical(version1):
@@ -117,9 +123,3 @@ def compare(version1, version2):
         return version1 + " is lesser than " + version2
     else:
         return version1 + " is equal to " + version2
-
-
-# This is a sligtly modified version of the function found in Appendix B of https://www.python.org/dev/peps/pep-0440/
-# It checks if the input string is a valid version string format
-def is_canonical(version):
-    return re.search(r'^([1-9][0-9]*!)?(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*)){1,2}((a|b|rc)(0|[1-9][0-9]*))?(\.post(0|[1-9][0-9]*))?(\.dev(0|[1-9][0-9]*))?$', version) is not None
