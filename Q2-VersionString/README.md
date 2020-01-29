@@ -18,6 +18,8 @@ However, there are some cases that are not covered:
 * 2020.1
 
 ### Library
-For the library part, I added the `__init__.py` in the versionString folder so python can treat it as a package. Then, I create setup.py and setup the library by running `python3 setup.py sdist` on the command line which creates the dist directory and version_compare.egg-info.
+For the library part, I added the `__init__.py` in the versionString folder so python can treat it as a package. Then, I create setup.py and setup the library by running `python3 setup.py sdist` on the command line which creates the dist directory and `version_compare.egg-info`.
 
-To download the library, you simply run `pip3 install ./dist/version_compare-0.0.1.tar.gz` in this directory in the command line. Then, you can test that it was properly downloaded by running `python3` and then writing `> from versionString import version_compare` on the shell. You can then use the function `version_compare.compare(version1, verson2)`
+To download the library, you simply run `pip3 install ./dist/version_compare-0.0.1.tar.gz` in this directory in the command line. 
+
+Then, you can test that it was properly downloaded by running `python3` and then writing `>>> from versionString import version_compare` on the shell. You can then use the function `version_compare.compare(version1, verson2)`
