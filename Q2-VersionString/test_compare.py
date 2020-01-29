@@ -1,5 +1,5 @@
 import unittest
-from versionCompare.version_compare import compare
+from versionString.version_compare import compare
 
 class TestCompare(unittest.TestCase):
     def test_numerical(self):
