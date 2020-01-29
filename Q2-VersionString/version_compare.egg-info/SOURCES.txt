@@ -1,0 +1,7 @@
+setup.py
+versionString/__init__.py
+versionString/version_compare.py
+version_compare.egg-info/PKG-INFO
+version_compare.egg-info/SOURCES.txt
+version_compare.egg-info/dependency_links.txt
+version_compare.egg-info/top_level.txt

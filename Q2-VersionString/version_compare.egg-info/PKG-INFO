@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: version-compare
+Version: 0.0.1
+Summary: A simply library with the function compare() that can compare two valid version string
+Home-page: https://github.com/NelsonZeng25/Ormuco-Test/tree/master/Q2-VersionString
+Author: Nelson Zeng
+Author-email: nelson.zeng25@gmail.com
+License: MIT
+Description: UNKNOWN
+Keywords: compare
+Platform: UNKNOWN
