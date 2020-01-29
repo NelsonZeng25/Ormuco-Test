@@ -1,21 +1,28 @@
 import re
 
-# This is a sligtly modified version of the function found in Appendix B of https://www.python.org/dev/peps/pep-0440/
+# This is a modified version of the function  is_canonical()) found in Appendix B of https://www.python.org/dev/peps/pep-0440/
 # It checks if the input string is a valid version string format
-def is_canonical(version):
-    return re.search(r'^([1-9][0-9]*!)?(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*)){1,2}((a|b|rc)(0|[1-9][0-9]*))?(\.post(0|[1-9][0-9]*))?(\.dev(0|[1-9][0-9]*))?$', version) is not None
-
+def is_valid(version):
+    return re.search(r'^([1-9][0-9]*!)?(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))(((a|b|rc)(0|[1-9][0-9]*))|(\.(0|[1-9][0-9]*)))?(\.post(0|[1-9][0-9]*))?(\.dev(0|[1-9][0-9]*))?$', version) is not None
 
 def compare(version1, version2):
-    # We start by checking if both inputs are valid version strings using the is_canonical() function
-    if not is_canonical(version1) and not is_canonical(version2):
+    # We start by checking if both inputs are valid version strings using the is_valid() function
+    if not is_valid(version1) and not is_valid(version2):
         return "Invalid version format for both versions"
-    elif not is_canonical(version1):
+    elif not is_valid(version1):
         return "Invalid version format for version 1"
-    elif not is_canonical(version2):
+    elif not is_valid(version2):
         return "Invalid version format for version 2"
 
-    # We split the strings with "." as the delimiters and evaluate each split individually
+    GREATER = version1 + " is greater than " + version2
+    LESSER = version1 + " is lesser than " + version2
+    EQUAL = version1 + " is equal to " + version2
+
+    # Check if they're exactly the same
+    if version1 == version2:
+        return EQUAL
+
+    # We split the strings with "." as the delimiters and evaluate each split element individually
     array1 = version1.split(".")
     array2 = version2.split(".")
 
@@ -28,9 +35,9 @@ def compare(version1, version2):
         # Simply compare numbers and check which one is greater
         if array1[i].isnumeric() and array2[i].isnumeric():
             if (int(array1[i]) > int(array2[i])):
-                return version1 + " is greater than " + version2
+                return GREATER
             elif (int(array1[i]) < int(array2[i])):
-                return version1 + " is lesser than " + version2
+                return LESSER
 
         # Case 2: One of them contains a pre-release string (i.e. a|b|rc)
             '''
@@ -50,29 +57,29 @@ def compare(version1, version2):
             temp1 = int(temp1.group(0))
             temp2 = int(temp2.group(0))
             if temp1 > temp2:
-                return version1 + " is greater than " + version2
+                return GREATER
             elif temp1 < temp2:
-                return version1 + " is lesser than " + version2
+                return LESSER
 
             temp1 = re.search(r"[abrc]+", array1[i])
             temp2 = re.search(r"[abrc]+", array2[i])
             if temp1 != None and temp2 == None:
-                return version1 + " is lesser than " + version2
+                return LESSER
             elif temp1 == None and temp2 != None:
-                return version1 + " is greater than " + version2
+                return GREATER
             elif temp1.group(0) > temp2.group(0):
-                return version1 + " is greater than " + version2
+                return GREATER
             elif temp1.group(0) < temp2.group(0):
-                return version1 + " is lesser than " + version2
+                return LESSER
 
             temp1 = re.search(r"[0-9]+$", array1[i])
             temp2 = re.search(r"[0-9]+$", array2[i])
             temp1 = int(temp1.group(0))
             temp2 = int(temp2.group(0))
             if temp1 > temp2:
-                return version1 + " is greater than " + version2
+                return GREATER
             elif temp1 < temp2:
-                return version1 + " is lesser than " + version2
+                return LESSER
 
         # Case 3: One of them contains a "post"
             '''
@@ -86,14 +93,14 @@ def compare(version1, version2):
                 temp1 = int(array1[i][4:])
                 temp2 = int(array2[i][4:])
                 if temp1 > temp2:
-                    return version1 + " is greater than " + version2
+                    return GREATER
                 elif temp1 < temp2:
-                    return version1 + " is lesser than " + version2
+                    return LESSER
 
             elif ("post" in array1[i] and "dev" in array2[i]) or array1[i].isnumeric():
-                return version1 + " is greater than " + version2
+                return GREATER
             elif ("dev" in array1[i] and "post" in array2[i]) or array2[i].isnumeric():
-                return version1 + " is lesser than " + version2
+                return LESSER
 
         # Case 4: One of them contains a "dev"
             '''
@@ -106,20 +113,20 @@ def compare(version1, version2):
                 temp1 = int(array1[i][3:])
                 temp2 = int(array2[i][3:])
                 if temp1 > temp2:
-                    return version1 + " is greater than " + version2
+                    return GREATER
                 elif temp1 < temp2:
-                    return version1 + " is lesser than " + version2
-            
+                    return LESSER
+
             elif "dev" not in array2[i]:
-                return version1 + " is lesser than " + version2
+                return LESSER
             elif "dev" not in array1[i]:
-                return version1 + " is greater than " + version2
+                return GREATER
 
     # After going through the for loop, we check if one of the arrays is bigger than the other
     # The larger one is greater than the other and if they have the same length, it means they're equal
     if len(array1) > len(array2):
-        return version1 + " is greater than " + version2
+        return GREATER
     elif len(array1) < len(array2):
-        return version1 + " is lesser than " + version2
+        return LESSER
     else:
-        return version1 + " is equal to " + version2
+        return EQUAL
