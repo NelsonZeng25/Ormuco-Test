@@ -23,3 +23,5 @@ For the library part, I added the `__init__.py` in the versionString folder so p
 To download the library, you simply run `pip3 install ./dist/version_compare-0.0.1.tar.gz` in this directory in the command line. 
 
 Then, you can test that it was properly downloaded by running `python3` and then writing `>>> from versionString import version_compare` on the shell. You can then use the function `version_compare.compare(version1, verson2)`
+
+Of course, to uninstall, simply type `pip3 uninstall version-compare`

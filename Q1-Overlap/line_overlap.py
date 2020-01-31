@@ -20,8 +20,8 @@ def overlap(line1, line2):
         There are only 5 possible outcomes for the 2 lines
         1. Line 1 is before line 2 and they don't overlap
         2. Line 1 is before line 2 and they overlap
-        3. Line 1 is after line 2 and they overlap
-        4. Line 1 is on top of line 2 so they overlap
+        3. Line 1 is on top of line 2 so they overlap
+        4. Line 1 is after line 2 and they overlap
         5. Line 1 is after line 2 and they don't overlap
         The solution here is to check for only when they don't overlap since that will lead to less comparisons
         We also check if Line 1 and Line 2 have valid inputs and return False if they're invalid

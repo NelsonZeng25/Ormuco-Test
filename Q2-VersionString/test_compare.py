@@ -69,6 +69,7 @@ class TestCompare(unittest.TestCase):
         version1 = "1.1.dev50"
         version2 = "1.1.dev555"
         self.assertEqual(compare(version1, version2), version1 + " is lesser than " + version2)
+        
     def test_post(self):
         # ------- GREATER --------
         version1 = "1.1.3.post50"
@@ -144,8 +145,6 @@ class TestCompare(unittest.TestCase):
         version1 = "1.1a5.1"
         version2 = "1.1.4a4"
         self.assertEqual(compare(version1, version2), "Invalid version format for both versions")
-
-        
 
     def test_mixed_inputs(self):
         # ------- GREATER --------

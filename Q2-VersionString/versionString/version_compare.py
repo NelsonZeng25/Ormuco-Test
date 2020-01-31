@@ -1,6 +1,6 @@
 import re
 
-# This is a modified version of the function  is_canonical()) found in Appendix B of https://www.python.org/dev/peps/pep-0440/
+# This is a modified version of the function (is_canonical()) found in Appendix B of https://www.python.org/dev/peps/pep-0440/
 # It checks if the input string is a valid version string format
 def is_valid(version):
     return re.search(r'^([1-9][0-9]*!)?(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))(((a|b|rc)(0|[1-9][0-9]*))|(\.(0|[1-9][0-9]*)))?(\.post(0|[1-9][0-9]*))?(\.dev(0|[1-9][0-9]*))?$', version) is not None
