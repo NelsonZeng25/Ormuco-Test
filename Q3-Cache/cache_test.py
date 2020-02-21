@@ -4,9 +4,6 @@ import helper
 from cache import GeoDistLRUCache
 
 class TestCache(unittest.TestCase):
-    
-    # Montreal         Latitude and Longitude
-    currentLocation = (45.508888, -73.561668)
 
     def test_Get_Value(self):
         cache = GeoDistLRUCache(5, (38.907192,-77.036871))
@@ -71,6 +68,8 @@ class TestCache(unittest.TestCase):
         self.assertRaises(ValueError, cache.get, 1)
 
     def test_Get_Closest_Cache(self):
+        # Montreal         Latitude and Longitude
+        currentLocation = (45.508888, -73.561668)
                 # United States (2nd closest)   Germany (furthest)    Canada (closest)
         locations = [(38.907192,-77.036871), (52.520007,13.404954),(45.42153,-75.697193)]
 
@@ -83,7 +82,7 @@ class TestCache(unittest.TestCase):
 
         cacheList = [cache1, cache2, cache3]
         
-        self.assertEqual("Canada", helper.get(1, self.currentLocation, cacheList))
+        self.assertEqual("Canada", helper.get(1, currentLocation, cacheList))
 
 if __name__ == '__main__':
     unittest.main()
