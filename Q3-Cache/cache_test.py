@@ -34,6 +34,13 @@ class TestCache(unittest.TestCase):
         cache.put(1, "hello")
         self.assertEqual("Key is already in cache", cache.put(1, "hello"))
 
+        self.assertRaises(TypeError, cache.put, 1, None)
+        self.assertRaises(TypeError, cache.put, None, "hello")
+        self.assertRaises(TypeError, cache.put, None, None)
+        self.assertRaises(TypeError, cache.put, 1, "hello", None)
+        self.assertRaises(ValueError, cache.put, 1, "hello", 0)
+        self.assertRaises(ValueError, cache.put, 1, "hello", -5)
+
     def test_Overwrite_Value(self):
         cache = GeoDistLRUCache(1, (38.907192,-77.036871))
         cache.put(1, "hello")

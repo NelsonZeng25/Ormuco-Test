@@ -39,14 +39,21 @@ class GeoDistLRUCache:
     def put(self, key, value, expirationTime = 100):
         """
         First, check the cache for expiration and get rid of all expired items
-        Second, if key is already in the Cache, 
+        Second, check for valid inputs
+        Third, if key is already in the Cache, 
             If the value is also the same, update the initial time and return error message
             If the value is not the same, overwrite the previous key with new value
-        Third, if the Cache is full, it gets rid of the LRU item
+        Fourth, if the cache is full, it gets rid of the LRU item
 
         Then, it adds the item to the MRU spot of the Cache with its value, time and expiration time.
         """
         self.checkExpiration()
+        
+        if (key == None or value == None or expirationTime == None):
+            raise TypeError("Invalid input")
+        if (expirationTime <= 0):
+            raise ValueError("Invalid experation time")
+
         if (key in self.priorityQueue):
             if (value == self.values[key]):
                 self.initialTimes[key] = time.time()
