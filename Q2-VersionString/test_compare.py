@@ -146,6 +146,12 @@ class TestCompare(unittest.TestCase):
         version2 = "1.1.4a4"
         self.assertEqual(compare(version1, version2), "Invalid version format for both versions")
 
+        # None value for input
+        # Empty strings are not accepted
+        version1 = None
+        version2 = ""
+        self.assertEqual(compare(version1, version2), "Invalid version format for both versions")
+
     def test_mixed_inputs(self):
         # ------- GREATER --------
 

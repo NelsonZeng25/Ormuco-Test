@@ -1,6 +1,8 @@
 # Geo Distributed LRU Cache
 
 ### Implementation
+Code is found in `cache.py` and `helper.py` and the test is found in `cache_test.py`
+
 For the cache, I focused primarily on the properties of the caches itself. So, the caches are Geo distributed and use the LRU convention with time expiration. The implementation is extremely simple because it only contains 2 methods (get() and put()) which are used respectively to get data from the cache and add data to the cache.
 
 Each cache contains 3 dictonaries where each dictionary share the same keys:

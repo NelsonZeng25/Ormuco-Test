@@ -1,8 +1,9 @@
 # Comparing Version Strings
 
 ### Code
-The code is found in `./versionString/version_compare.py.` and the tests in `./test_compare.py`. I implemented my comparison to handle many different cases and different versions. 
+The code is found in `./versionString/version_compare.py.` and the tests in `test_compare.py`.
 
+I implemented my comparison to handle many different cases and different versions. 
 Here's a quick list of valid version strings that my code can handle:
 * 1.1
 * 1.1.1

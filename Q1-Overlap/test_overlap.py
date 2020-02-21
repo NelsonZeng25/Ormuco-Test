@@ -83,6 +83,19 @@ class TestOverlap(unittest.TestCase):
         line2 = Line(5, 10)
         self.assertFalse(overlap(line1, line2))
 
+    def test_None_Input(self):
+        # ------- FALSE --------
+        line1 = Line(None, 5)
+        line2 = None
+        self.assertFalse(overlap(line1, line2))
+
+        line1 = Line(None, None)
+        line2 = Line(None, None)
+        self.assertFalse(overlap(line1, line2))
+
+        line1 = None
+        line2 = None
+        self.assertFalse(overlap(line1, line2))
 
 if __name__ == '__main__':
     unittest.main()

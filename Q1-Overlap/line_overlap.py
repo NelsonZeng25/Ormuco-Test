@@ -10,7 +10,7 @@ class Line():
             else:
                 self.x1 = int(x2)
                 self.x2 = int(x1)
-        except ValueError:
+        except:
             self.x1 = None
             self.x2 = None
 
@@ -27,7 +27,6 @@ def overlap(line1, line2):
         We also check if Line 1 and Line 2 have valid inputs and return False if they're invalid
     """
     if (line1 == None or line2 == None or line1.x1 == None or line2.x1 == None):
-        print("Invalid input")
         return False
     else:
         return not (line2.x2 < line1.x1 or line1.x2 < line2.x1)
