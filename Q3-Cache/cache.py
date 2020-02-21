@@ -5,6 +5,7 @@ class GeoDistLRUCache:
     
     def __init__(self, size, location):
         """ Initialize Cache
+        For every dictionary, they all have common keys
         Arguments:
         size            -> (int) how many items the cache can hold
         location        -> (tuple) geolocation of the cache (latitude, longitude)
@@ -59,7 +60,7 @@ class GeoDistLRUCache:
             self.initialTimes.pop(lastKey)
             self.expirationTimes.pop(lastKey)
         
-        self.priorityQueue.append(key)
+        self.priorityQueue.appendleft(key)
         self.values[key] = value
         self.initialTimes[key] = time.time()
         self.expirationTimes[key] = expirationTime
@@ -68,8 +69,8 @@ class GeoDistLRUCache:
         """
         Goes through all the keys in the cache and gets rid of all expired items
         """
-        for key, initialTime in self.initialTimes.items():
-            if (time.time() > initialTime + self.expirationTimes[key]):
+        for key in list(self.initialTimes):
+            if (time.time() > self.initialTimes[key] + self.expirationTimes[key]):
                 self.priorityQueue.remove(key)
                 self.values.pop(key)
                 self.initialTimes.pop(key)

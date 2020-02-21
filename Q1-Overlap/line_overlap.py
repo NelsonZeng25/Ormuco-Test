@@ -26,7 +26,7 @@ def overlap(line1, line2):
         The solution here is to check for only when they don't overlap since that will lead to less comparisons
         We also check if Line 1 and Line 2 have valid inputs and return False if they're invalid
     """
-    if (line1.x1 == None or line2.x1 == None):
+    if (line1 == None or line2 == None or line1.x1 == None or line2.x1 == None):
         print("Invalid input")
         return False
     else:

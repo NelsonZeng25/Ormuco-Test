@@ -59,19 +59,10 @@ def createSpecificCaches(size, location, locationList):
         cacheDict[cache] = distance(location, cache.location)
     return sorted(cacheDict, key=cacheDict.get)
 
-
-def updateCacheList(cacheList, location):
+def get(key, location, cacheList):
     cacheDict = {}
-    for cache in len(cacheList):
+    for cache in cacheList:
         cacheDict[cache] = distance(location, cache.location)
-    
     sortedCaches = sorted(cacheDict, key=cacheDict.get)
-    return sortedCaches
-
-if __name__ == '__main__':
-    currentLocation = (45.508888, -73.561668)       # Montreal Longitude and Latitude
-    cacheList = createRandomCaches(5, currentLocation, 5)
-
-    for i in cacheList:
-        print(i.location, distance(currentLocation, i.location))
+    return sortedCaches[0].get(key)
 
